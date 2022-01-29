@@ -9,7 +9,7 @@ const router = express.Router();
 // /admin/add-product => GET
 router.get('/add-product', adminController.getAddProduct);
 
-// /admin/products => GET  -- all start with /admin - what we filter for in app.js
+// /admin/products => GET
 router.get('/products', adminController.getProducts);
 
 // /admin/add-product => POST
