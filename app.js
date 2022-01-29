@@ -1,5 +1,5 @@
 const path = require('path');
-cont PATH = process.env.PORT || 5000;
+const PATH = process.env.PORT || 5000;
 
 const express = require('express');
 const bodyParser = require('body-parser');
