@@ -1,5 +1,7 @@
 const path = require('path');
 
+const cors = require('cors');// Place this with other requires (like 'path' and 'express')
+const PORT = process.env.PORT || 5000;
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -8,6 +10,19 @@ const errorController = require('./controllers/error');
 const User = require('./models/user');
 
 const app = express();
+
+const corsOptions = {
+  origin: "https://cse341mundt.herokuapp.com/",
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
+
+const options = {
+  family: 4
+};
+
+const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://haileymg:Hmmajm987!21@cluster0.jvprn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+                      
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -30,27 +45,20 @@ app.use((req, res, next) => {
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
+
+
 app.use(errorController.get404);
 
 mongoose
   .connect(
-    'mongodb+srv://haileymg:Hmmajm987!21@cluster0-ntrwp.mongodb.net/shop?retryWrites=true'
+    MONGODB_URL, options
   )
   .then(result => {
-    User.findOne().then(user => {
-      if (!user) {
-        const user = new User({
-          name: 'Max',
-          email: 'max@test.com',
-          cart: {
-            items: []
-          }
-        });
-        user.save();
-      }
-    });
-    app.listen(3000);
+    // This should be your user handling code implement following the course videos
+    app.listen(PORT);
   })
   .catch(err => {
     console.log(err);
   });
+
+  
