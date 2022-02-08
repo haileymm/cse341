@@ -8,7 +8,7 @@ const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
       api_key:
-        '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'
+        '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'
     }
   })
 );
@@ -99,7 +99,7 @@ exports.postSignup = (req, res, next) => {
           res.redirect('/login');
           return transporter.sendMail({
             to: email,
-            from: 'shop@node-complete.com',
+            from: 'haileymundt@gmail.com',
             subject: 'Signup succeeded!',
             html: '<h1>You successfully signed up!</h1>'
           });
